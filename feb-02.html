@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class Notes — ENGL 170</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --deep-ink: #2C3E50;
+      --ink-medium: #4A6785;
+      --warm-cream: #F5F0E6;
+      --aged-paper: #EDE4D3;
+      --sepia-brown: #8B5A2B;
+      --near-black: #333333;
+      --muted-teal: #17A2B8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'EB Garamond', Georgia, serif;
+      background: #FDFBF7;
+      color: var(--near-black);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2em;
+    }
+
+    /* Header */
+    header {
+      background: var(--deep-ink);
+      color: var(--warm-cream);
+      padding: 1.5em 2em;
+      border-bottom: 4px solid var(--sepia-brown);
+      margin-bottom: 2em;
+    }
+
+    header .course-label {
+      font-size: 0.9em;
+      opacity: 0.9;
+      margin-bottom: 0.25em;
+    }
+
+    header h1 {
+      font-size: 2.25em;
+      font-weight: normal;
+      margin: 0;
+    }
+
+    /* Slogan Banner */
+    .slogan-banner {
+      background: var(--aged-paper);
+      border-left: 4px solid var(--sepia-brown);
+      padding: 1.25em 1.5em;
+      margin-bottom: 2em;
+      font-size: 1.2em;
+      font-style: italic;
+      color: var(--deep-ink);
+    }
+
+    .slogan-banner .main-slogan {
+      font-weight: 600;
+      font-style: normal;
+      display: block;
+      margin-bottom: 0.5em;
+    }
+
+    .slogan-banner .subtext {
+      font-size: 0.9em;
+      opacity: 0.85;
+    }
+
+    /* Date heading */
+    .date-heading {
+      color: var(--deep-ink);
+      font-size: 1.5em;
+      border-bottom: 2px solid var(--sepia-brown);
+      padding-bottom: 0.3em;
+      margin-bottom: 1.5em;
+    }
+
+    /* Notes list */
+    .notes-list {
+      list-style: none;
+    }
+
+    .note-item {
+      background: var(--warm-cream);
+      border: 1px solid #D4C5B0;
+      border-radius: 8px;
+      padding: 1.5em;
+      margin-bottom: 1.5em;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .note-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .note-item.active {
+      border-left: 4px solid var(--muted-teal);
+      background: #D1ECF1;
+    }
+
+    .note-number {
+      display: inline-block;
+      background: var(--deep-ink);
+      color: var(--warm-cream);
+      width: 2em;
+      height: 2em;
+      line-height: 2em;
+      text-align: center;
+      border-radius: 50%;
+      margin-right: 0.75em;
+      font-size: 0.9em;
+    }
+
+    .note-title {
+      font-size: 1.2em;
+      font-weight: 600;
+      color: var(--deep-ink);
+    }
+
+    .note-content {
+      margin-top: 1em;
+      padding-top: 1em;
+      border-top: 1px solid #D4C5B0;
+      line-height: 1.8;
+    }
+
+    .note-content p {
+      margin-bottom: 1em;
+    }
+
+    .note-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .note-content a {
+      color: var(--muted-teal);
+    }
+
+    .note-content ul, .note-content ol {
+      margin-left: 1.5em;
+      margin-bottom: 1em;
+    }
+
+    .note-content li {
+      margin-bottom: 0.5em;
+    }
+
+    /* Divider */
+    .divider {
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--sepia-brown), transparent);
+      margin: 2em 0;
+    }
+
+    /* Navigation for previous sessions */
+    .session-nav {
+      margin-top: 3em;
+      padding-top: 2em;
+      border-top: 1px solid var(--aged-paper);
+    }
+
+    .session-nav h3 {
+      color: var(--ink-medium);
+      font-size: 1.1em;
+      margin-bottom: 1em;
+    }
+
+    .session-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75em;
+    }
+
+    .session-list a {
+      display: inline-block;
+      background: var(--warm-cream);
+      color: var(--deep-ink);
+      padding: 0.5em 1em;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.95em;
+      border: 1px solid #D4C5B0;
+      transition: background 0.2s;
+    }
+
+    .session-list a:hover {
+      background: var(--aged-paper);
+    }
+
+    .session-list a.current {
+      background: var(--deep-ink);
+      color: var(--warm-cream);
+      border-color: var(--deep-ink);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 3em;
+      padding-top: 1.5em;
+      border-top: 1px solid var(--aged-paper);
+      text-align: center;
+      color: var(--ink-medium);
+      font-size: 0.9em;
+    }
+
+    footer a {
+      color: var(--muted-teal);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <p class="course-label">ENGL 170 — Composition II</p>
+      <h1>Class Notes</h1>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- THE SLOGAN -->
+    <div class="slogan-banner">
+      <span class="main-slogan">If it breaks, breathe. Then try again.</span>
+      <span class="subtext">Things go wrong all the time. Save your work, take a breath, and we'll figure it out together.</span>
+    </div>
+
+    <!-- DATE HEADING -->
+    <h2 class="date-heading">Monday, February 2, 2026</h2>
+
+    <!-- NOTES FOR TODAY -->
+    <ul class="notes-list">
+
+      <li class="note-item active">
+        <span class="note-number">1</span>
+        <span class="note-title">No Class This Friday (Feb 6)</span>
+        <div class="note-content">
+          <p><strong>Reminder from the email sent last week:</strong> There's no class this Friday, February 6, due to an all-day LU-sponsored event.</p>
+          <p>The College of Arts and Humanities is hosting a <strong>CivicAI Design Thinking Hackathon</strong> (9am–3pm). Key details:</p>
+          <ul>
+            <li>No prior experience in AI, coding, or design required</li>
+            <li>All participants receive a <strong>Design Thinking certificate</strong></li>
+            <li>Teams develop a tangible project you can list on your CV/résumé</li>
+            <li>Participants are eligible to present at a <strong>campus showcase in April</strong></li>
+            <li>Lunch provided</li>
+          </ul>
+          <p>If you're interested in participating, <strong>email Dr. Plate</strong>.</p>
+        </div>
+      </li>
+
+      <li class="note-item">
+        <span class="note-number">2</span>
+        <span class="note-title">Check Your Posts on the Dashboard</span>
+        <div class="note-content">
+          <p><strong>Reminder from Sunday's email:</strong> You should have <strong>8 posts</strong> visible on the dashboard by now.</p>
+          <p>How to check:</p>
+          <ol>
+            <li>Go to the <a href="https://buildlittleworlds.github.io/engl170-spring2026-dashboard/" target="_blank">class dashboard</a></li>
+            <li>Click the <strong>"All writers"</strong> dropdown</li>
+            <li>Select your name</li>
+            <li>You should see 8 posts listed</li>
+          </ol>
+          <p>If your posts aren't showing up, watch the <strong>GitHub Video Tutorials</strong> on the Canvas home page to troubleshoot.</p>
+          <p><strong>Instructor-assisted option:</strong> If GitHub just isn't working for you, use the <a href="https://forms.gle/B44rreMx9BKMU3bFA" target="_blank">Google Form</a> to submit posts instead. Follow the instructions there to add Dr. Plate as a collaborator on your repo.</p>
+          <p>This week (Monday and Wednesday) we'll make sure everyone has a topic built out into 5+ posts — this will be the foundation for deeper academic research after Week 4.</p>
+        </div>
+      </li>
+
+      <li class="note-item">
+        <span class="note-number">3</span>
+        <span class="note-title">In-Class Activity: Research a New Source</span>
+        <div class="note-content">
+          <p>Today's activity:</p>
+          <ol>
+            <li><strong>Choose one of your existing blog posts</strong> that you want to build on</li>
+            <li><strong>Do some research</strong> to find an additional source that makes your argument more rigorous and interesting</li>
+            <li><strong>Write a new post</strong> that incorporates this source</li>
+          </ol>
+          <p>Dr. Plate will show a quick way to use <strong>Gemini</strong> for this research.</p>
+        </div>
+      </li>
+
+      <li class="note-item">
+        <span class="note-number">4</span>
+        <span class="note-title">Test Your Publishing Method</span>
+        <div class="note-content">
+          <p>Once you've written your new post, <strong>publish it today in class</strong> to make sure your workflow is working:</p>
+          <ul>
+            <li><strong>GitHub route:</strong> Follow the usual steps to add the post to your blog</li>
+            <li><strong>Google Form route:</strong> Use the form to submit your post — test it out today to make sure it works for you</li>
+          </ul>
+          <p>Dr. Plate will be walking around to help troubleshoot.</p>
+        </div>
+      </li>
+
+    </ul>
+
+    <div class="divider"></div>
+
+    <!-- PREVIOUS SESSIONS -->
+    <nav class="session-nav">
+      <h3>All Sessions</h3>
+      <ul class="session-list">
+        <li><a href="jan-14.html">Jan 14</a></li>
+        <li><a href="jan-16.html">Jan 16</a></li>
+        <li><a href="jan-21.html">Jan 21</a></li>
+        <li><a href="jan-23.html">Jan 23</a></li>
+        <li><a href="jan-28.html">Jan 28</a></li>
+        <li><a href="feb-02.html" class="current">Feb 2</a></li>
+      </ul>
+    </nav>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>ENGL 170 — Spring 2026 — <a href="https://buildlittleworlds.github.io/engl170-spring2026-dashboard/">Dashboard</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
