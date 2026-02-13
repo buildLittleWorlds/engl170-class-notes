@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class Notes — ENGL 170</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --deep-ink: #2C3E50;
+      --ink-medium: #4A6785;
+      --warm-cream: #F5F0E6;
+      --aged-paper: #EDE4D3;
+      --sepia-brown: #8B5A2B;
+      --near-black: #333333;
+      --muted-teal: #17A2B8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'EB Garamond', Georgia, serif;
+      background: #FDFBF7;
+      color: var(--near-black);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2em;
+    }
+
+    /* Header */
+    header {
+      background: var(--deep-ink);
+      color: var(--warm-cream);
+      padding: 1.5em 2em;
+      border-bottom: 4px solid var(--sepia-brown);
+      margin-bottom: 2em;
+    }
+
+    header .course-label {
+      font-size: 0.9em;
+      opacity: 0.9;
+      margin-bottom: 0.25em;
+    }
+
+    header h1 {
+      font-size: 2.25em;
+      font-weight: normal;
+      margin: 0;
+    }
+
+    /* Slogan Banner */
+    .slogan-banner {
+      background: var(--aged-paper);
+      border-left: 4px solid var(--sepia-brown);
+      padding: 1.25em 1.5em;
+      margin-bottom: 2em;
+      font-size: 1.2em;
+      font-style: italic;
+      color: var(--deep-ink);
+    }
+
+    .slogan-banner .main-slogan {
+      font-weight: 600;
+      font-style: normal;
+      display: block;
+      margin-bottom: 0.5em;
+    }
+
+    .slogan-banner .subtext {
+      font-size: 0.9em;
+      opacity: 0.85;
+    }
+
+    /* Date heading */
+    .date-heading {
+      color: var(--deep-ink);
+      font-size: 1.5em;
+      border-bottom: 2px solid var(--sepia-brown);
+      padding-bottom: 0.3em;
+      margin-bottom: 1.5em;
+    }
+
+    /* Notes list */
+    .notes-list {
+      list-style: none;
+    }
+
+    .note-item {
+      background: var(--warm-cream);
+      border: 1px solid #D4C5B0;
+      border-radius: 8px;
+      padding: 1.5em;
+      margin-bottom: 1.5em;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .note-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .note-item.active {
+      border-left: 4px solid var(--muted-teal);
+      background: #D1ECF1;
+    }
+
+    .note-number {
+      display: inline-block;
+      background: var(--deep-ink);
+      color: var(--warm-cream);
+      width: 2em;
+      height: 2em;
+      line-height: 2em;
+      text-align: center;
+      border-radius: 50%;
+      margin-right: 0.75em;
+      font-size: 0.9em;
+    }
+
+    .note-title {
+      font-size: 1.2em;
+      font-weight: 600;
+      color: var(--deep-ink);
+    }
+
+    .note-content {
+      margin-top: 1em;
+      padding-top: 1em;
+      border-top: 1px solid #D4C5B0;
+      line-height: 1.8;
+    }
+
+    .note-content p {
+      margin-bottom: 1em;
+    }
+
+    .note-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .note-content a {
+      color: var(--muted-teal);
+    }
+
+    .note-content ul, .note-content ol {
+      margin-left: 1.5em;
+      margin-bottom: 1em;
+    }
+
+    .note-content li {
+      margin-bottom: 0.5em;
+    }
+
+    /* Divider */
+    .divider {
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--sepia-brown), transparent);
+      margin: 2em 0;
+    }
+
+    /* Navigation for previous sessions */
+    .session-nav {
+      margin-top: 3em;
+      padding-top: 2em;
+      border-top: 1px solid var(--aged-paper);
+    }
+
+    .session-nav h3 {
+      color: var(--ink-medium);
+      font-size: 1.1em;
+      margin-bottom: 1em;
+    }
+
+    .session-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75em;
+    }
+
+    .session-list a {
+      display: inline-block;
+      background: var(--warm-cream);
+      color: var(--deep-ink);
+      padding: 0.5em 1em;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.95em;
+      border: 1px solid #D4C5B0;
+      transition: background 0.2s;
+    }
+
+    .session-list a:hover {
+      background: var(--aged-paper);
+    }
+
+    .session-list a.current {
+      background: var(--deep-ink);
+      color: var(--warm-cream);
+      border-color: var(--deep-ink);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 3em;
+      padding-top: 1.5em;
+      border-top: 1px solid var(--aged-paper);
+      text-align: center;
+      color: var(--ink-medium);
+      font-size: 0.9em;
+    }
+
+    footer a {
+      color: var(--muted-teal);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <p class="course-label">ENGL 170 — Composition II</p>
+      <h1>Class Notes</h1>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- THE SLOGAN -->
+    <div class="slogan-banner">
+      <span class="main-slogan">If it breaks, breathe. Then try again.</span>
+      <span class="subtext">Things go wrong all the time. Save your work, take a breath, and we'll figure it out together.</span>
+    </div>
+
+    <!-- DATE HEADING -->
+    <h2 class="date-heading">Friday, February 13, 2026</h2>
+
+    <!-- NOTES FOR TODAY -->
+    <ul class="notes-list">
+
+      <li class="note-item active">
+        <span class="note-number">1</span>
+        <span class="note-title">Discussion: Dominic's New Monoculture Post</span>
+        <div class="note-content">
+          <p>Today we'll discuss Dominic's new monoculture post as a class.</p>
+        </div>
+      </li>
+
+      <li class="note-item">
+        <span class="note-number">2</span>
+        <span class="note-title">Create a Gemini Gem or JetGPT Custom GPT</span>
+        <div class="note-content">
+          <p>If you haven't done this yet, create either a Gemini Gem or a JetGPT custom GPT (if you use JetGPT).</p>
+          <p>Start here if you need it: <a href="https://lindenwood.instructure.com/courses/107189/pages/intro-to-gems?module_item_id=5134616" target="_blank"><strong>Intro to Gems (Canvas)</strong></a>.</p>
+          <p>You can start this in class today or over the weekend. The goal is to begin building one now.</p>
+        </div>
+      </li>
+
+      <li class="note-item">
+        <span class="note-number">3</span>
+        <span class="note-title">Course Update: Weeks 6-8 Will Be Revised</span>
+        <div class="note-content">
+          <p>The standalone Gemini Gems module will be folded into revised versions of Weeks 6, 7, and 8.</p>
+          <p>Expect some schedule revisions over the next few weeks as this gets integrated into the first half of the course.</p>
+          <p>Any work you do now on Gemini Gems or custom GPTs to help build posts will be useful going forward.</p>
+        </div>
+      </li>
+
+    </ul>
+
+    <div class="divider"></div>
+
+    <!-- PREVIOUS SESSIONS -->
+    <nav class="session-nav">
+      <h3>All Sessions</h3>
+      <ul class="session-list">
+        <li><a href="jan-14.html">Jan 14</a></li>
+        <li><a href="jan-16.html">Jan 16</a></li>
+        <li><a href="jan-21.html">Jan 21</a></li>
+        <li><a href="jan-23.html">Jan 23</a></li>
+        <li><a href="jan-28.html">Jan 28</a></li>
+        <li><a href="feb-02.html">Feb 2</a></li>
+        <li><a href="feb-13.html" class="current">Feb 13</a></li>
+      </ul>
+    </nav>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>ENGL 170 — Spring 2026 — <a href="https://buildlittleworlds.github.io/engl170-spring2026-dashboard/">Dashboard</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
